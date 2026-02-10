@@ -1,0 +1,19 @@
+services:
+  discord-monitor:
+    build: .
+    container_name: discord-monitor
+    restart: always  # always restart if container crashes
+    env_file:
+      - .env         # load API key and webhook URLs
+    volumes:
+      - ./data:/app/data  # persist JSON files across restarts
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "3"
+    # Set timezone (optional)
+    environment:
+      - TZ=Africa/Johannesburg
+    mem_limit: 128m
+    cpus: 0.10
