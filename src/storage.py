@@ -46,12 +46,23 @@ def get_youtube_channels():
 
 
 def get_last_seen():
-    """Return dict of last seen videos."""
-    return load_json(LAST_SEEN_FILE, {})
+    """
+    Return dictionary of last seen IDs per platform.
+    """
+    data = load_json(LAST_SEEN_FILE, {"youtube": {}, "reddit": {}, "web": {}})
+    return data
 
 
-def update_last_seen(channel_url, video_id):
-    """Update last seen video ID."""
+def update_last_seen(channel_url, video_id, platform="youtube"):
+    """
+    Update last seen ID for a specific platform.
+    """
+
     data = get_last_seen()
-    data[channel_url] = video_id
+
+    # Ensure platform exists
+    if platform not in data:
+        data[platform] = {}
+
+    data[platform][channel_url] = video_id
     save_json(LAST_SEEN_FILE, data)
