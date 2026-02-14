@@ -15,7 +15,7 @@ API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 # Base directory (project root)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_FILE = os.path.join(BASE_DIR, "data/channel_cache.json")
+CACHE_FILE = os.path.join(BASE_DIR, "data/cache_channel_ids.json")
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
