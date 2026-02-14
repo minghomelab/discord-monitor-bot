@@ -152,3 +152,11 @@ def get_last_seen_for_channel(channel_url, platform="youtube"):
     conn.close()
 
     return row[0] if row else None
+
+def channel_exists(url):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute("SELECT 1 FROM channels WHERE url=?", (url,))
+    exists = c.fetchone() is not None
+    conn.close()
+    return exists
